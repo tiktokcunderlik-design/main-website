@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up — CY Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/css/intlTelInput.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+
+  <div class="auth-layout">
+
+    <!-- LEFT PANEL -->
+    <div class="auth-left">
+      <a href="index.html" class="logo">CY<span>Web</span></a>
+      <div class="auth-left-content">
+        <h2>Start growing your business online today.</h2>
+        <div class="auth-features">
+          <div class="auth-feature">
+            <div class="auth-feature-icon">⚡</div>
+            <div>
+              <strong>48-hour delivery</strong>
+              <p>Your first draft ready in 2 days</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon">🔒</div>
+            <div>
+              <strong>Secure & reliable</strong>
+              <p>SSL, backups and 99.9% uptime</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon">💬</div>
+            <div>
+              <strong>Real support</strong>
+              <p>Talk to a real person anytime</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon">💳</div>
+            <div>
+              <strong>No setup fee</strong>
+              <p>Cancel anytime, no contracts</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="auth-left-blob"></div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="auth-right">
+      <div class="auth-card">
+
+        <div class="auth-header">
+          <h1>Create your account</h1>
+          <p>Already have an account? <a href="login.html">Sign in</a></p>
+        </div>
+
+        <!-- STEP INDICATOR -->
+        <div class="steps-indicator">
+          <div class="step-dot active" id="dot1"><span>1</span></div>
+          <div class="step-line"></div>
+          <div class="step-dot" id="dot2"><span>2</span></div>
+          <div class="step-line"></div>
+          <div class="step-dot" id="dot3"><span>3</span></div>
+        </div>
+        <div class="steps-labels">
+          <span class="active">Account</span>
+          <span>Personal</span>
+          <span>Location</span>
+        </div>
+
+        <!-- FORM -->
+        <form id="signupForm" novalidate>
+
+          <!-- STEP 1: Account -->
+          <div class="form-step active" id="step1">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" id="email" placeholder="you@example.com" autocomplete="email" />
+              <span class="field-error" id="emailError"></span>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-with-icon">
+                <input type="password" id="password" placeholder="Min. 8 characters" autocomplete="new-password" />
+                <button type="button" class="toggle-pw" id="togglePw" aria-label="Show password">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <div class="pw-strength" id="pwStrength">
+                <div class="pw-bar"><div class="pw-fill" id="pwFill"></div></div>
+                <span id="pwLabel">Too short</span>
+              </div>
+              <span class="field-error" id="passwordError"></span>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm password</label>
+              <div class="input-with-icon">
+                <input type="password" id="confirmPassword" placeholder="Repeat your password" autocomplete="new-password" />
+              </div>
+              <span class="field-error" id="confirmError"></span>
+            </div>
+            <button type="button" class="btn-next" id="nextStep1">Continue →</button>
+          </div>
+
+          <!-- STEP 2: Personal -->
+          <div class="form-step" id="step2">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First name</label>
+                <input type="text" id="firstName" placeholder="Ján" autocomplete="given-name" />
+                <span class="field-error" id="firstNameError"></span>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last name</label>
+                <input type="text" id="lastName" placeholder="Novák" autocomplete="family-name" />
+                <span class="field-error" id="lastNameError"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone number</label>
+              <input type="tel" id="phone" placeholder="Your phone number" autocomplete="tel" />
+              <span class="field-error" id="phoneError"></span>
+              <span class="field-hint">We'll use this to contact you about your website</span>
+            </div>
+            <div class="form-group">
+              <label for="businessName">Business name <span class="optional">(optional)</span></label>
+              <input type="text" id="businessName" placeholder="My Business s.r.o." />
+            </div>
+            <div class="step-nav">
+              <button type="button" class="btn-back" id="backStep2">← Back</button>
+              <button type="button" class="btn-next" id="nextStep2">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Location -->
+          <div class="form-step" id="step3">
+            <div class="form-group">
+              <label for="country">Country</label>
+              <select id="country">
+                <option value="">Select your country</option>
+                <option value="SK" selected>🇸🇰 Slovakia</option>
+                <option value="CZ">🇨🇿 Czech Republic</option>
+                <option value="AT">🇦🇹 Austria</option>
+                <option value="PL">🇵🇱 Poland</option>
+                <option value="HU">🇭🇺 Hungary</option>
+                <option value="DE">🇩🇪 Germany</option>
+                <option value="other">🌍 Other</option>
+              </select>
+              <span class="field-error" id="countryError"></span>
+            </div>
+            <div class="form-group">
+              <label for="city">City / Town</label>
+              <input type="text" id="city" placeholder="Banská Bystrica" autocomplete="address-level2" />
+              <span class="field-error" id="cityError"></span>
+            </div>
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="agreeTerms" />
+                <span class="checkmark"></span>
+                I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+              </label>
+              <span class="field-error" id="termsError"></span>
+            </div>
+            <div class="step-nav">
+              <button type="button" class="btn-back" id="backStep3">← Back</button>
+              <button type="submit" class="btn-submit" id="submitBtn">
+                <span id="submitText">Create Account</span>
+                <span id="submitSpinner" class="spinner hidden"></span>
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- SUCCESS STATE -->
+        <div class="auth-success hidden" id="successState">
+          <div class="success-icon">✉️</div>
+          <h2>Check your email!</h2>
+          <p>We sent a confirmation link to <strong id="confirmedEmail"></strong>. Click the link to activate your account.</p>
+          <p class="success-note">Didn't get it? Check your spam folder or <button class="link-btn" id="resendBtn">resend the email</button>.</p>
+          <a href="login.html" class="btn-next" style="display:inline-block;text-align:center;margin-top:1rem;">Go to Login</a>
+        </div>
+
+        <!-- ERROR BANNER -->
+        <div class="auth-error hidden" id="errorBanner">
+          <span id="errorMsg">Something went wrong. Please try again.</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- intl-tel-input -->
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/intlTelInput.min.js"></script>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // ============================================
+    // CONFIGURATION — paste your Supabase keys here
+    // ============================================
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL'
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+    // ============================================
+    // PHONE VALIDATION — intl-tel-input
+    // ============================================
+    const phoneInput = document.querySelector('#phone')
+    const iti = intlTelInput(phoneInput, {
+      initialCountry: 'sk',
+      preferredCountries: ['sk', 'cz', 'at', 'pl', 'hu', 'de'],
+      separateDialCode: true,
+      utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js'
+    })
+
+    // ============================================
+    // PASSWORD STRENGTH
+    // ============================================
+    const pwInput = document.getElementById('password')
+    const pwFill = document.getElementById('pwFill')
+    const pwLabel = document.getElementById('pwLabel')
+
+    pwInput.addEventListener('input', () => {
+      const val = pwInput.value
+      let strength = 0
+      if (val.length >= 8) strength++
+      if (/[A-Z]/.test(val)) strength++
+      if (/[0-9]/.test(val)) strength++
+      if (/[^A-Za-z0-9]/.test(val)) strength++
+
+      const labels = ['Too short', 'Weak', 'Fair', 'Good', 'Strong']
+      const colors = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#16a34a']
+      const widths = ['10%', '25%', '50%', '75%', '100%']
+
+      pwFill.style.width = widths[strength]
+      pwFill.style.background = colors[strength]
+      pwLabel.textContent = labels[strength]
+      pwLabel.style.color = colors[strength]
+    })
+
+    // Toggle password visibility
+    document.getElementById('togglePw').addEventListener('click', () => {
+      const type = pwInput.type === 'password' ? 'text' : 'password'
+      pwInput.type = type
+    })
+
+    // ============================================
+    // MULTI-STEP FORM
+    // ============================================
+    let currentStep = 1
+
+    function showStep(step) {
+      document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'))
+      document.getElementById('step' + step).classList.add('active')
+
+      document.querySelectorAll('.step-dot').forEach((d, i) => {
+        d.classList.toggle('active', i < step)
+        d.classList.toggle('done', i < step - 1)
+      })
+      document.querySelectorAll('.steps-labels span').forEach((l, i) => {
+        l.classList.toggle('active', i === step - 1)
+      })
+      currentStep = step
+    }
+
+    function showError(id, msg) {
+      const el = document.getElementById(id)
+      if (el) { el.textContent = msg; el.style.display = 'block' }
+    }
+    function clearError(id) {
+      const el = document.getElementById(id)
+      if (el) { el.textContent = ''; el.style.display = 'none' }
+    }
+    function clearAllErrors() {
+      document.querySelectorAll('.field-error').forEach(e => { e.textContent = ''; e.style.display = 'none' })
+    }
+
+    // Step 1 validation
+    document.getElementById('nextStep1').addEventListener('click', () => {
+      clearAllErrors()
+      const email = document.getElementById('email').value.trim()
+      const pw = document.getElementById('password').value
+      const cpw = document.getElementById('confirmPassword').value
+      let valid = true
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('emailError', 'Please enter a valid email address'); valid = false
+      }
+      if (pw.length < 8) {
+        showError('passwordError', 'Password must be at least 8 characters'); valid = false
+      }
+      if (pw !== cpw) {
+        showError('confirmError', 'Passwords do not match'); valid = false
+      }
+      if (valid) showStep(2)
+    })
+
+    document.getElementById('backStep2').addEventListener('click', () => showStep(1))
+
+    // Step 2 validation
+    document.getElementById('nextStep2').addEventListener('click', () => {
+      clearAllErrors()
+      const fn = document.getElementById('firstName').value.trim()
+      const ln = document.getElementById('lastName').value.trim()
+      let valid = true
+
+      if (!fn) { showError('firstNameError', 'First name is required'); valid = false }
+      if (!ln) { showError('lastNameError', 'Last name is required'); valid = false }
+      if (!iti.isValidNumber()) { showError('phoneError', 'Please enter a valid phone number'); valid = false }
+      if (valid) showStep(3)
+    })
+
+    document.getElementById('backStep3').addEventListener('click', () => showStep(2))
+
+    // ============================================
+    // SUBMIT — Supabase signup
+    // ============================================
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      clearAllErrors()
+
+      const country = document.getElementById('country').value
+      const city = document.getElementById('city').value.trim()
+      const terms = document.getElementById('agreeTerms').checked
+      let valid = true
+
+      if (!country) { showError('countryError', 'Please select your country'); valid = false }
+      if (!city) { showError('cityError', 'Please enter your city'); valid = false }
+      if (!terms) { showError('termsError', 'You must agree to the terms'); valid = false }
+      if (!valid) return
+
+      // Show loading
+      document.getElementById('submitText').classList.add('hidden')
+      document.getElementById('submitSpinner').classList.remove('hidden')
+      document.getElementById('submitBtn').disabled = true
+
+      const email = document.getElementById('email').value.trim()
+      const password = document.getElementById('password').value
+      const firstName = document.getElementById('firstName').value.trim()
+      const lastName = document.getElementById('lastName').value.trim()
+      const phone = iti.getNumber()
+      const businessName = document.getElementById('businessName').value.trim()
+
+      try {
+        // 1. Create auth user — Supabase sends confirmation email automatically
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { first_name: firstName, last_name: lastName, phone, country, city, business_name: businessName }
+          }
+        })
+
+        if (error) throw error
+
+        // 2. Save extended profile to profiles table
+        if (data.user) {
+          await supabase.from('profiles').upsert({
+            id: data.user.id,
+            first_name: firstName,
+            last_name: lastName,
+            phone,
+            country,
+            city,
+            business_name: businessName,
+            plan: 'none'
+          })
+        }
+
+        // 3. Show success
+        document.getElementById('signupForm').classList.add('hidden')
+        document.getElementById('confirmedEmail').textContent = email
+        document.getElementById('successState').classList.remove('hidden')
+
+      } catch (err) {
+        document.getElementById('errorMsg').textContent = err.message || 'Something went wrong. Please try again.'
+        document.getElementById('errorBanner').classList.remove('hidden')
+        document.getElementById('submitText').classList.remove('hidden')
+        document.getElementById('submitSpinner').classList.add('hidden')
+        document.getElementById('submitBtn').disabled = false
+      }
+    })
+
+    // Resend confirmation email
+    document.getElementById('resendBtn').addEventListener('click', async () => {
+      const email = document.getElementById('email').value.trim()
+      await supabase.auth.resend({ type: 'signup', email })
+      document.getElementById('resendBtn').textContent = 'Sent!'
+    })
+  </script>
+</body>
+</html>

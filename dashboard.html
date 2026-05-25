@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — CY Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-logo">CY<span>Web</span></div>
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboardApp" class="dashboard hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo">CY<span>Web</span></a>
+        <button class="sidebar-close" id="sidebarClose">✕</button>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-section="overview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Overview
+        </a>
+        <a href="#" class="nav-item" data-section="website">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          My Website
+        </a>
+        <a href="#" class="nav-item" data-section="requests">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 8.5-8.5z"/></svg>
+          Change Requests
+        </a>
+        <a href="#" class="nav-item" data-section="billing">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Billing & Plan
+        </a>
+        <a href="#" class="nav-item" data-section="profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          My Profile
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn-logout" id="logoutBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- TOP BAR -->
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="topbar-title" id="topbarTitle">Overview</div>
+        <div class="topbar-user">
+          <div class="user-avatar" id="userAvatar">?</div>
+          <span id="userName">Loading...</span>
+        </div>
+      </header>
+
+      <!-- CONTENT SECTIONS -->
+      <main class="content">
+
+        <!-- OVERVIEW -->
+        <section class="section active" id="sectionOverview">
+          <div class="section-heading">
+            <h1>Welcome back, <span id="welcomeName">there</span> 👋</h1>
+            <p>Here's what's happening with your website.</p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon blue">🌐</div>
+              <div class="stat-info">
+                <span class="stat-val" id="websiteStatus">—</span>
+                <span class="stat-key">Website Status</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">💳</div>
+              <div class="stat-info">
+                <span class="stat-val" id="currentPlan">—</span>
+                <span class="stat-key">Current Plan</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon amber">📋</div>
+              <div class="stat-info">
+                <span class="stat-val" id="openRequests">0</span>
+                <span class="stat-key">Open Requests</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon purple">📅</div>
+              <div class="stat-info">
+                <span class="stat-val" id="nextBilling">—</span>
+                <span class="stat-key">Next Billing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cards-row">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3>Quick Actions</h3>
+              </div>
+              <div class="quick-actions">
+                <button class="quick-btn" onclick="showSection('requests')">
+                  <span>✏️</span> Request a change
+                </button>
+                <button class="quick-btn" onclick="showSection('billing')">
+                  <span>⬆️</span> Upgrade my plan
+                </button>
+                <button class="quick-btn" onclick="showSection('website')">
+                  <span>🌐</span> View my website
+                </button>
+                <button class="quick-btn" onclick="showSection('profile')">
+                  <span>👤</span> Edit my profile
+                </button>
+              </div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3>Recent Activity</h3>
+              </div>
+              <div class="activity-list" id="activityList">
+                <div class="activity-item">
+                  <span class="activity-dot green"></span>
+                  <div>
+                    <strong>Account created</strong>
+                    <p>Welcome to CY Web!</p>
+                  </div>
+                </div>
+                <div class="activity-empty">No other activity yet.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- WEBSITE -->
+        <section class="section" id="sectionWebsite">
+          <div class="section-heading">
+            <h1>My Website</h1>
+            <p>Your website details and live preview.</p>
+          </div>
+          <div class="dash-card">
+            <div class="website-info">
+              <div class="website-status-badge" id="wsBadge">
+                <span class="dot"></span> No website yet
+              </div>
+              <div class="website-url" id="wsUrl">—</div>
+              <p class="website-note" id="wsNote">Your website will appear here once we set it up after your plan is activated.</p>
+              <a href="#" class="btn-primary-sm" id="wsLink" style="display:none;" target="_blank">Open Website →</a>
+            </div>
+          </div>
+          <div class="dash-card" style="margin-top:1rem;">
+            <div class="dash-card-header"><h3>Need something changed?</h3></div>
+            <p style="color:var(--gray-500);font-size:0.9rem;margin-bottom:1rem;">Submit a change request and we'll update your site within 24 hours.</p>
+            <button class="btn-primary-sm" onclick="showSection('requests')">Submit a Request →</button>
+          </div>
+        </section>
+
+        <!-- REQUESTS -->
+        <section class="section" id="sectionRequests">
+          <div class="section-heading">
+            <h1>Change Requests</h1>
+            <p>Tell us what you need changed on your website.</p>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-header"><h3>New Request</h3></div>
+            <div class="form-group">
+              <label>What would you like to change?</label>
+              <select id="requestType">
+                <option value="">Select type...</option>
+                <option>Update text or content</option>
+                <option>Add or change photos</option>
+                <option>Update contact info / hours</option>
+                <option>Add a new page or section</option>
+                <option>Fix something broken</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Describe what you need</label>
+              <textarea id="requestDesc" rows="4" placeholder="Please describe the change in as much detail as possible..."></textarea>
+            </div>
+            <button class="btn-primary-sm" id="submitRequest">Submit Request</button>
+            <div class="request-success hidden" id="requestSuccess">✅ Request submitted! We'll get back to you within 24 hours.</div>
+          </div>
+
+          <div class="dash-card" style="margin-top:1rem;">
+            <div class="dash-card-header"><h3>Previous Requests</h3></div>
+            <div class="empty-state">No previous requests yet.</div>
+          </div>
+        </section>
+
+        <!-- BILLING -->
+        <section class="section" id="sectionBilling">
+          <div class="section-heading">
+            <h1>Billing & Plan</h1>
+            <p>Manage your subscription and view invoices.</p>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card-header"><h3>Current Plan</h3></div>
+            <div class="plan-display" id="planDisplay">
+              <div class="plan-badge" id="planBadge">No Plan</div>
+              <div class="plan-price-display" id="planPriceDisplay">—</div>
+              <p id="planDesc" style="color:var(--gray-500);font-size:0.9rem;">You don't have an active plan yet. Choose one below to get started.</p>
+            </div>
+          </div>
+
+          <div class="plans-grid" style="margin-top:1rem;">
+            <div class="plan-card">
+              <div class="plan-name">Starter</div>
+              <div class="plan-price">€49<span>/month</span></div>
+              <ul>
+                <li>✓ 1–3 page website</li>
+                <li>✓ Mobile-friendly design</li>
+                <li>✓ SSL + Hosting</li>
+                <li>✓ 1 update/month</li>
+              </ul>
+              <button class="btn-plan" onclick="startCheckout('starter')">Choose Starter</button>
+            </div>
+            <div class="plan-card featured">
+              <div class="plan-badge-top">Most Popular</div>
+              <div class="plan-name">Professional</div>
+              <div class="plan-price">€89<span>/month</span></div>
+              <ul>
+                <li>✓ Up to 8 pages</li>
+                <li>✓ Custom design</li>
+                <li>✓ Local SEO</li>
+                <li>✓ Unlimited updates</li>
+              </ul>
+              <button class="btn-plan featured" onclick="startCheckout('professional')">Choose Professional</button>
+            </div>
+            <div class="plan-card">
+              <div class="plan-name">Business</div>
+              <div class="plan-price">€149<span>/month</span></div>
+              <ul>
+                <li>✓ Unlimited pages</li>
+                <li>✓ E-commerce store</li>
+                <li>✓ Advanced SEO</li>
+                <li>✓ Priority support</li>
+              </ul>
+              <button class="btn-plan" onclick="startCheckout('business')">Choose Business</button>
+            </div>
+          </div>
+
+          <div class="dash-card" style="margin-top:1rem;">
+            <div class="dash-card-header"><h3>Invoices</h3></div>
+            <div class="empty-state">No invoices yet. They'll appear here after your first payment.</div>
+          </div>
+        </section>
+
+        <!-- PROFILE -->
+        <section class="section" id="sectionProfile">
+          <div class="section-heading">
+            <h1>My Profile</h1>
+            <p>Update your personal information.</p>
+          </div>
+          <div class="dash-card">
+            <div class="profile-avatar-row">
+              <div class="profile-avatar" id="profileAvatar">?</div>
+              <div>
+                <strong id="profileFullName">—</strong>
+                <p id="profileEmail" style="color:var(--gray-500);font-size:0.9rem;">—</p>
+              </div>
+            </div>
+            <div class="form-row" style="margin-top:1.5rem;">
+              <div class="form-group">
+                <label>First name</label>
+                <input type="text" id="editFirstName" />
+              </div>
+              <div class="form-group">
+                <label>Last name</label>
+                <input type="text" id="editLastName" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Business name</label>
+              <input type="text" id="editBusiness" />
+            </div>
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" id="editCity" />
+            </div>
+            <button class="btn-primary-sm" id="saveProfile">Save Changes</button>
+            <div class="request-success hidden" id="profileSuccess">✅ Profile updated successfully!</div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // ============================================
+    // CONFIGURATION
+    // ============================================
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL'
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+    // Stripe checkout URLs — replace with your Stripe payment links
+    const STRIPE_LINKS = {
+      starter: 'https://buy.stripe.com/YOUR_STARTER_LINK',
+      professional: 'https://buy.stripe.com/YOUR_PROFESSIONAL_LINK',
+      business: 'https://buy.stripe.com/YOUR_BUSINESS_LINK'
+    }
+
+    let userProfile = null
+
+    // ============================================
+    // AUTH GUARD — redirect to login if not logged in
+    // ============================================
+    async function init() {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        window.location.href = 'login.html'
+        return
+      }
+
+      // Load profile
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', session.user.id)
+        .single()
+
+      userProfile = profile || {}
+      const firstName = profile?.first_name || session.user.email.split('@')[0]
+
+      // Fill UI
+      document.getElementById('welcomeName').textContent = firstName
+      document.getElementById('userName').textContent = firstName + ' ' + (profile?.last_name || '')
+      document.getElementById('userAvatar').textContent = firstName[0].toUpperCase()
+      document.getElementById('profileAvatar').textContent = firstName[0].toUpperCase()
+      document.getElementById('profileFullName').textContent = (profile?.first_name || '') + ' ' + (profile?.last_name || '')
+      document.getElementById('profileEmail').textContent = session.user.email
+      document.getElementById('editFirstName').value = profile?.first_name || ''
+      document.getElementById('editLastName').value = profile?.last_name || ''
+      document.getElementById('editBusiness').value = profile?.business_name || ''
+      document.getElementById('editCity').value = profile?.city || ''
+
+      // Plan display
+      const plan = profile?.plan || 'none'
+      const planNames = { none: 'No Plan', starter: 'Starter', professional: 'Professional', business: 'Business' }
+      const planPrices = { none: '—', starter: '€49/month', professional: '€89/month', business: '€149/month' }
+      document.getElementById('currentPlan').textContent = planNames[plan]
+      document.getElementById('planBadge').textContent = planNames[plan]
+      document.getElementById('planPriceDisplay').textContent = planPrices[plan]
+      document.getElementById('websiteStatus').textContent = plan !== 'none' ? '🟢 Live' : '⚫ Not set up'
+      document.getElementById('nextBilling').textContent = plan !== 'none' ? 'Monthly' : '—'
+
+      // Hide loading, show dashboard
+      document.getElementById('loadingScreen').classList.add('hidden')
+      document.getElementById('dashboardApp').classList.remove('hidden')
+    }
+
+    init()
+
+    // ============================================
+    // NAVIGATION
+    // ============================================
+    function showSection(name) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'))
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'))
+      document.getElementById('section' + name.charAt(0).toUpperCase() + name.slice(1)).classList.add('active')
+      document.querySelector('[data-section="' + name + '"]').classList.add('active')
+      document.getElementById('topbarTitle').textContent = name.charAt(0).toUpperCase() + name.slice(1)
+      document.getElementById('sidebar').classList.remove('open')
+    }
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault()
+        showSection(item.dataset.section)
+      })
+    })
+
+    // Mobile sidebar
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('open')
+    })
+    document.getElementById('sidebarClose').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.remove('open')
+    })
+
+    // ============================================
+    // LOGOUT
+    // ============================================
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await supabase.auth.signOut()
+      window.location.href = 'login.html'
+    })
+
+    // ============================================
+    // STRIPE CHECKOUT
+    // ============================================
+    function startCheckout(plan) {
+      const url = STRIPE_LINKS[plan]
+      if (url.includes('YOUR_')) {
+        alert('Stripe is not connected yet. Add your Stripe payment links in dashboard.html')
+        return
+      }
+      window.location.href = url
+    }
+
+    // ============================================
+    // CHANGE REQUEST
+    // ============================================
+    document.getElementById('submitRequest').addEventListener('click', async () => {
+      const type = document.getElementById('requestType').value
+      const desc = document.getElementById('requestDesc').value.trim()
+      if (!type || !desc) { alert('Please fill in both fields.'); return }
+
+      const { data: { session } } = await supabase.auth.getSession()
+      await supabase.from('change_requests').insert({
+        user_id: session.user.id,
+        type,
+        description: desc,
+        status: 'open'
+      })
+
+      document.getElementById('requestSuccess').classList.remove('hidden')
+      document.getElementById('requestType').value = ''
+      document.getElementById('requestDesc').value = ''
+      document.getElementById('openRequests').textContent =
+        parseInt(document.getElementById('openRequests').textContent || 0) + 1
+    })
+
+    // ============================================
+    // SAVE PROFILE
+    // ============================================
+    document.getElementById('saveProfile').addEventListener('click', async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      const updates = {
+        id: session.user.id,
+        first_name: document.getElementById('editFirstName').value.trim(),
+        last_name: document.getElementById('editLastName').value.trim(),
+        business_name: document.getElementById('editBusiness').value.trim(),
+        city: document.getElementById('editCity').value.trim()
+      }
+      await supabase.from('profiles').upsert(updates)
+      document.getElementById('profileSuccess').classList.remove('hidden')
+      setTimeout(() => document.getElementById('profileSuccess').classList.add('hidden'), 3000)
+    })
+  </script>
+</body>
+</html>
