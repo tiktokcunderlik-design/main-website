@@ -9,3 +9,5 @@ document.querySelector('.cta-btn').addEventListener('click', async () => {
   })
 
   const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY)
+  const SUPABASE_URL = 'YOUR_SUPABASE_URL'      // ← paste here
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'  // ← paste here
