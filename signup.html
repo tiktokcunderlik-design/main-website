@@ -208,9 +208,9 @@
     // ============================================
     // CONFIGURATION — paste your Supabase keys here
     // ============================================
-    const SUPABASE_URL = 'https://jwlhxzftreyjunfahqqu.supabase.co'      // ← paste here
+    const SUPABASE_URL = 'https://jwlhxzftreyjunfahqqu.supabaseClient.co'      // ← paste here
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3bGh4emZ0cmV5anVuZmFocXF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTQwMTQsImV4cCI6MjA5NDA5MDAxNH0.yGxhAh_DM6StJOeSfZy09WhiP5S6MihEGDknhFe1t_k'  // ← paste here
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    const supabase = window.supabaseClient.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
     // ============================================
     // PHONE VALIDATION — intl-tel-input
@@ -353,7 +353,7 @@
 
       try {
         // 1. Create auth user — Supabase sends confirmation email automatically
-        const { data, error } = await supabase.auth.signUp({
+        const { data, error } = await supabaseClient.auth.signUp({
           email,
           password,
           options: {
@@ -365,7 +365,7 @@
 
         // 2. Save extended profile to profiles table
         if (data.user) {
-          await supabase.from('profiles').upsert({
+          await supabaseClient.from('profiles').upsert({
             id: data.user.id,
             first_name: firstName,
             last_name: lastName,
@@ -394,7 +394,7 @@
     // Resend confirmation email
     document.getElementById('resendBtn').addEventListener('click', async () => {
       const email = document.getElementById('email').value.trim()
-      await supabase.auth.resend({ type: 'signup', email })
+      await supabaseClient.auth.resend({ type: 'signup', email })
       document.getElementById('resendBtn').textContent = 'Sent!'
     })
   </script>
