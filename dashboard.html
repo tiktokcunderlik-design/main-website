@@ -336,7 +336,7 @@
       }
 
       // Load profile
-      const { data: profile } = await supabase
+      const { data: profile } = await supabaseClient
         .from('profiles')
         .select('*')
         .eq('id', session.user.id)
