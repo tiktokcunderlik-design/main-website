@@ -314,7 +314,7 @@
     // ============================================
     const SUPABASE_URL = 'https://jwlhxzftreyjunfahqqu.supabase.co'      // ← paste here
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3bGh4emZ0cmV5anVuZmFocXF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTQwMTQsImV4cCI6MjA5NDA5MDAxNH0.yGxhAh_DM6StJOeSfZy09WhiP5S6MihEGDknhFe1t_k'  // ← paste here
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
     // Stripe checkout URLs — replace with your Stripe payment links
     const STRIPE_LINKS = {
@@ -329,7 +329,7 @@
     // AUTH GUARD — redirect to login if not logged in
     // ============================================
     async function init() {
-      const { data: { session } } = await supabase.auth.getSession()
+      const { data: { session } } = await supabaseClient.auth.getSession()
       if (!session) {
         window.location.href = 'login.html'
         return
@@ -405,7 +405,7 @@
     // LOGOUT
     // ============================================
     document.getElementById('logoutBtn').addEventListener('click', async () => {
-      await supabase.auth.signOut()
+      await supabaseClient.auth.signOut()
       window.location.href = 'login.html'
     })
 
@@ -429,8 +429,8 @@
       const desc = document.getElementById('requestDesc').value.trim()
       if (!type || !desc) { alert('Please fill in both fields.'); return }
 
-      const { data: { session } } = await supabase.auth.getSession()
-      await supabase.from('change_requests').insert({
+      const { data: { session } } = await supabaseClient.auth.getSession()
+      await supabaseClient.from('change_requests').insert({
         user_id: session.user.id,
         type,
         description: desc,
@@ -448,7 +448,7 @@
     // SAVE PROFILE
     // ============================================
     document.getElementById('saveProfile').addEventListener('click', async () => {
-      const { data: { session } } = await supabase.auth.getSession()
+      const { data: { session } } = await supabaseClient.auth.getSession()
       const updates = {
         id: session.user.id,
         first_name: document.getElementById('editFirstName').value.trim(),
@@ -456,7 +456,7 @@
         business_name: document.getElementById('editBusiness').value.trim(),
         city: document.getElementById('editCity').value.trim()
       }
-      await supabase.from('profiles').upsert(updates)
+      await supabaseClient.from('profiles').upsert(updates)
       document.getElementById('profileSuccess').classList.remove('hidden')
       setTimeout(() => document.getElementById('profileSuccess').classList.add('hidden'), 3000)
     })
